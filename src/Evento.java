@@ -1,3 +1,5 @@
+import jdk.jfr.Event;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -22,12 +24,28 @@ public class Evento {
      * inicializa los atributos de forma adecuada
      * Todos los argumento recibidos son correctos (no hay incoherencias)
      */                 
-    public Evento(String nombre, String fecha, String horaInicio,
-    String horaFin) {
-         
+    public Evento(String nombre, String fecha, String horaInicio, String horaFin) {
+         this.nombre = capital(nombre.trim());
+         this.fecha = LocalDate.parse(fecha.trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+         this.horaInicio = LocalTime.parse(horaInicio.trim());
+         this.horaFin = LocalTime.parse(horaFin.trim());
     }
 
-   
+    private String capital(String name) {
+
+        var splitFrase = name.split(" "); //Separo por palabras la frase en un Array
+        var str = "";
+        var resultado = "";
+
+        // A cada palabra cojo la primera letra, la capitalizo y la concateno con el resto de su palabra
+        for (int i = 0; i < splitFrase.length; i++) {
+            str = splitFrase[i].substring(0,1).toUpperCase() + splitFrase[i].substring(1, splitFrase[i].length());
+            // Uno la frase con espacios en cada palabra
+            resultado += str + " ";
+        }
+
+        return resultado.trim(); //Vuelvo a limpiar la frase por el espacio anterior para eliminar el último espacio
+    }
 
     /**
      * accesor para el nombre del evento
