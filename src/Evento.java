@@ -1,6 +1,4 @@
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
@@ -38,7 +36,7 @@ public class Evento {
         // A cada palabra cojo la primera letra, la capitalizo y la concateno con el resto de su palabra
         for (int i = 0; i < splitFrase.length; i++) {
             str = splitFrase[i].substring(0,1).toUpperCase() + splitFrase[i].substring(1, splitFrase[i].length());
-            // Uno la frase con espacios en cada palabra
+            // Uno las palabras con espacios para formar la frase
             resultado += str + " ";
         }
 
@@ -138,10 +136,7 @@ public class Evento {
      */
     public int getDuracion() {
 
-        int hFin = (getHoraFin().getHour()*60) + (getHoraFin().getMinute());
-        int hIni = (getHoraInicio().getHour()*60) + (getHoraInicio().getMinute());
-        return hFin-hIni;
-
+        return (int) Duration.between(getHoraInicio(), getHoraFin()).toMinutes();
     }
 
     /**
@@ -153,8 +148,7 @@ public class Evento {
      */
     public boolean antesDe(Evento otro) {
 
-
-        return true;
+        return getFecha().isBefore(otro.getFecha()) || getHoraInicio().isBefore(otro.getHoraInicio());
     }
 
   
@@ -190,7 +184,7 @@ public class Evento {
         System.out.println(ev2.toString());     
 
         System.out.println();
-        Evento ev3 = new Evento("   baluarte Pamplona    negra   ", "29/05/2021",
+        Evento ev3 = new Evento("   baluarte Pamplona negra   ", "29/05/2021",
                 "17:00",
                 "21:00");
         System.out.println(ev3.toString());
