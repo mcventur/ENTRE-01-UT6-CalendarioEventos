@@ -1,11 +1,8 @@
-import jdk.jfr.Event;
-
-import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Representa a un evento del calendario
@@ -109,7 +106,8 @@ public class Evento {
      * que se obtendrá a partir de la fecha del evento
      */
     public int getDia() {
-        return 0;
+
+        return getFecha().getDayOfWeek().getValue();
     }
 
     /**
@@ -117,6 +115,21 @@ public class Evento {
      * que se obtendrá a partir de la fecha del evento
      */
     public Mes getMes() {
+
+        switch (getFecha().getMonthValue()){
+            case 1: return Mes.ENERO;
+            case 2: return Mes.FEBRERO;
+            case 3: return Mes.MARZO;
+            case 4: return Mes.ABRIL;
+            case 5: return Mes.MAYO;
+            case 6: return Mes.JUNIO;
+            case 7: return Mes.JULIO;
+            case 8: return Mes.AGOSTO;
+            case 9: return Mes.SEPTIEMBRE;
+            case 10: return Mes.OCTUBRE;
+            case 11: return Mes.NOVIEMBRE;
+            case 12: return Mes.DICIEMBRE;
+        }
         return null;
     }
 
