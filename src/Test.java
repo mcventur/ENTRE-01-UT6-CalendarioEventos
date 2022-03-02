@@ -5,10 +5,12 @@ public class Test
 
         System.out.println("evento1.getDia() = " + evento1.getDia());
         System.out.println("evento1.getMes() = " + evento1.getMes());
+        System.out.println("evento1.getDuracion() = " + evento1.getDuracion());
 
         Evento evento2 = new Evento("Comida restaurante europa", "22/05/2021", "12:00","17:00");
 
         System.out.println("evento1.getDia() = " + evento2.getDia());
         System.out.println("evento1.getMes() = " + evento2.getMes());
+        System.out.println("evento1.getDuracion() = " + evento2.getDuracion());
     }
 }

@@ -137,7 +137,10 @@ public class Evento {
      * calcula y devuelve la duración del evento en minutos
      */
     public int getDuracion() {
-        return 0;
+
+        int hFin = (getHoraFin().getHour()*60) + (getHoraFin().getMinute());
+        int hIni = (getHoraInicio().getHour()*60) + (getHoraInicio().getMinute());
+        return hFin-hIni;
 
     }
 
@@ -149,8 +152,9 @@ public class Evento {
      * Pista! usa un objeto LocalDateTime
      */
     public boolean antesDe(Evento otro) {
-        return true;
 
+
+        return true;
     }
 
   
