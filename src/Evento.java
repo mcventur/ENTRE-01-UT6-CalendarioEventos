@@ -1,9 +1,11 @@
 import jdk.jfr.Event;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * Representa a un evento del calendario
@@ -14,10 +16,8 @@ public class Evento {
     private LocalDate fecha;
     private LocalTime horaInicio;
     private LocalTime horaFin;
-    private static DateTimeFormatter formateadorFecha = DateTimeFormatter
-        .ofPattern("dd/MM/yyyy");
-    private static DateTimeFormatter formateadorHora = DateTimeFormatter
-        .ofPattern("HH:mm");
+    private static DateTimeFormatter formateadorFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static DateTimeFormatter formateadorHora = DateTimeFormatter.ofPattern("HH:mm");
 
     /**
      * A partir de los argumentos recibidos
@@ -25,8 +25,9 @@ public class Evento {
      * Todos los argumento recibidos son correctos (no hay incoherencias)
      */                 
     public Evento(String nombre, String fecha, String horaInicio, String horaFin) {
+
          this.nombre = capital(nombre.trim());
-         this.fecha = LocalDate.parse(fecha.trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+         this.fecha = LocalDate.parse(fecha.trim(), formateadorFecha);
          this.horaInicio = LocalTime.parse(horaInicio.trim());
          this.horaFin = LocalTime.parse(horaFin.trim());
     }
