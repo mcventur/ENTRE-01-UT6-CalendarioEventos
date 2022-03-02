@@ -2,10 +2,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
- * Representa a un evento del calendario
- * 
+ *  Representa a un evento del calendario
+ *  @author Adrián Las
  */
 public class Evento {
     private String nombre;
@@ -22,12 +23,26 @@ public class Evento {
      * inicializa los atributos de forma adecuada
      * Todos los argumento recibidos son correctos (no hay incoherencias)
      */                 
-    public Evento(String nombre, String fecha, String horaInicio,
-    String horaFin) {
-         
+    public Evento(String nombre, String fecha, String horaInicio, String horaFin) {
+        this.nombre = fnombre(nombre);
+        this.fecha = LocalDate.parse(fecha);
+        this.horaInicio = LocalTime.parse(horaInicio);
+        this.horaFin = LocalTime.parse(horaFin);
+        //TODO: Cambiar parse, usar formatter
     }
 
-   
+    private String fnombre(String nombre) {
+        StringBuilder sb = new StringBuilder();
+        String[] tokens = nombre.strip().split(" ");
+        for(int i=0; i<tokens.length; i++){
+            if(!tokens[i].equalsIgnoreCase(" ")){
+                sb.append(tokens[i].toUpperCase().charAt(0) + tokens[i].toLowerCase().substring(1));
+            }
+            if(i != tokens.length-1) sb.append(" ");
+        }
+        return sb.toString();
+        //TODO: Debug
+    }
 
     /**
      * accesor para el nombre del evento
@@ -90,7 +105,7 @@ public class Evento {
      * que se obtendrá a partir de la fecha del evento
      */
     public int getDia() {
-        return 0;
+        return fecha.getDayOfWeek().getValue();
     }
 
     /**
@@ -98,15 +113,16 @@ public class Evento {
      * que se obtendrá a partir de la fecha del evento
      */
     public Mes getMes() {
-        return null;
+        return Mes.values()[fecha.getMonthValue()];
+        //TODO: Debug
     }
 
     /**
      * calcula y devuelve la duración del evento en minutos
      */
     public int getDuracion() {
-        return 0;
-
+        return horaFin.toSecondOfDay()/60 - horaInicio.toSecondOfDay()/60;
+        //TODO: Debug
     }
 
     /**
@@ -117,8 +133,13 @@ public class Evento {
      * Pista! usa un objeto LocalDateTime
      */
     public boolean antesDe(Evento otro) {
-        return true;
-
+        if(fecha.isBefore(otro.fecha)) return true;
+        else if(fecha.equals(otro.fecha)){
+            if(horaInicio.isBefore(otro.horaInicio)) return true;
+            else return false;
+        }
+        else return false;
+        //TODO: Debug
     }
 
   
