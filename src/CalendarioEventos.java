@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import jdk.jfr.Event;
+
+import java.util.*;
 
 /**
  * Esta clase modela un sencillo calendario de eventos.
@@ -19,6 +18,8 @@ import java.util.TreeSet;
  * 
  */
 public class CalendarioEventos {
+
+	/*ATRIBUTOS*/
 	private TreeMap<Mes, ArrayList<Evento>> calendario;
 
 	/**
@@ -40,7 +41,17 @@ public class CalendarioEventos {
 	 * muy bien usar aquí
 	 */
 	public void addEvento(Evento nuevo) {
-		 
+
+		ArrayList<Evento> eventos = new ArrayList<>();
+
+		for (Map.Entry<Mes, ArrayList<Evento>> i : calendario.()) {
+
+			if(i.getKey().equals(nuevo.getMes())){
+
+
+			}
+		}
+
 
 	}
 
@@ -52,7 +63,9 @@ public class CalendarioEventos {
 	 * Usar el conjunto de entradas  
 	 */
 	public String toString() {
-		 
+
+		StringBuilder sb = new StringBuilder();
+
 		return null;
 	}
 
