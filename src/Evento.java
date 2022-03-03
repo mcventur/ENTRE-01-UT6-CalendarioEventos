@@ -25,10 +25,9 @@ public class Evento {
      */                 
     public Evento(String nombre, String fecha, String horaInicio, String horaFin) {
         this.nombre = fnombre(nombre);
-        this.fecha = LocalDate.parse(fecha);
-        this.horaInicio = LocalTime.parse(horaInicio);
-        this.horaFin = LocalTime.parse(horaFin);
-        //TODO: Cambiar parse, usar formatter
+        this.fecha = LocalDate.from(formateadorFecha.parse(fecha.toString()));
+        this.horaInicio = LocalTime.from(formateadorHora.parse(horaInicio.toString()));
+        this.horaFin = LocalTime.from(formateadorHora.parse(horaFin.toString()));
     }
 
     private String fnombre(String nombre) {
