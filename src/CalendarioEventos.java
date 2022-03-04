@@ -42,15 +42,7 @@ public class CalendarioEventos {
 	 */
 	public void addEvento(Evento nuevo) {
 
-		ArrayList<Evento> eventos = new ArrayList<>();
 
-		for (Map.Entry<Mes, ArrayList<Evento>> i : calendario.()) {
-
-			if(i.getKey().equals(nuevo.getMes())){
-
-
-			}
-		}
 
 
 	}

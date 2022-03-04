@@ -23,8 +23,8 @@ public class Evento {
 
          this.nombre = capital(nombre.trim());
          this.fecha = LocalDate.parse(fecha.trim(), formateadorFecha);
-         this.horaInicio = LocalTime.parse(horaInicio.trim());
-         this.horaFin = LocalTime.parse(horaFin.trim());
+         this.horaInicio = LocalTime.parse(horaInicio.trim(), formateadorHora);
+         this.horaFin = LocalTime.parse(horaFin.trim(), formateadorHora);
     }
 
     private String capital(String name) {
@@ -35,6 +35,7 @@ public class Evento {
 
         // A cada palabra cojo la primera letra, la capitalizo y la concateno con el resto de su palabra
         for (int i = 0; i < splitFrase.length; i++) {
+            splitFrase[i].trim();
             str = splitFrase[i].substring(0,1).toUpperCase() + splitFrase[i].substring(1, splitFrase[i].length());
             // Uno las palabras con espacios para formar la frase
             resultado += str + " ";
