@@ -1,6 +1,7 @@
-import java.time.*;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 
 /**
  * Representa a un evento del calendario
@@ -35,8 +36,7 @@ public class Evento {
 
         // A cada palabra cojo la primera letra, la capitalizo y la concateno con el resto de su palabra
         for (int i = 0; i < splitFrase.length; i++) {
-            splitFrase[i].trim();
-            str = splitFrase[i].substring(0,1).toUpperCase() + splitFrase[i].substring(1, splitFrase[i].length());
+            str = splitFrase[i].substring(0,1).toUpperCase() + splitFrase[i].substring(1);
             // Uno las palabras con espacios para formar la frase
             resultado += str + " ";
         }
