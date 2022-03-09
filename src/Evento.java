@@ -1,5 +1,6 @@
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -138,7 +139,9 @@ public class Evento {
      */
     public boolean antesDe(Evento otro) {
 
-        return getFecha().isBefore(otro.getFecha());
+        LocalDateTime miFecha=LocalDateTime.of(this.fecha,this.horaInicio);
+        LocalDateTime otraFecha= LocalDateTime.of(otro.getFecha(),otro.getHoraInicio());
+        return (miFecha.compareTo(otraFecha)<0);
     }
 
   
