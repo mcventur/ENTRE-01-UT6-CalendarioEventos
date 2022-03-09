@@ -1,3 +1,4 @@
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -25,22 +26,20 @@ public class Evento {
      */                 
     public Evento(String nombre, String fecha, String horaInicio, String horaFin) {
         this.nombre = fnombre(nombre);
-        this.fecha = LocalDate.from(formateadorFecha.parse(fecha.toString()));
-        this.horaInicio = LocalTime.from(formateadorHora.parse(horaInicio.toString()));
-        this.horaFin = LocalTime.from(formateadorHora.parse(horaFin.toString()));
+        this.fecha = LocalDate.parse(fecha.trim(),formateadorFecha);
+        this.horaInicio = LocalTime.parse(horaInicio.trim(),formateadorHora);
+        this.horaFin = LocalTime.parse(horaFin.trim(),formateadorHora);
     }
 
     private String fnombre(String nombre) {
-        StringBuilder sb = new StringBuilder();
-        String[] tokens = nombre.strip().split(" ");
-        for(int i=0; i<tokens.length; i++){
-            if(!tokens[i].equalsIgnoreCase(" ")){
-                sb.append(tokens[i].toUpperCase().charAt(0) + tokens[i].toLowerCase().substring(1));
+        StringBuilder ret = new StringBuilder();
+
+        for(String parte:nombre.split(" ")){
+            if(!parte.isBlank()){
+                ret.append(parte.toUpperCase().charAt(0)).append(parte.toLowerCase().substring(1)).append(" ");
             }
-            if(i != tokens.length-1) sb.append(" ");
         }
-        return sb.toString();
-        //TODO: Debug
+        return ret.toString().trim();
     }
 
     /**
@@ -112,16 +111,14 @@ public class Evento {
      * que se obtendrá a partir de la fecha del evento
      */
     public Mes getMes() {
-        return Mes.values()[fecha.getMonthValue()];
-        //TODO: Debug
+        return Mes.values()[fecha.getMonthValue()-1];
     }
 
     /**
      * calcula y devuelve la duración del evento en minutos
      */
     public int getDuracion() {
-        return horaFin.toSecondOfDay()/60 - horaInicio.toSecondOfDay()/60;
-        //TODO: Debug
+        return (int)Duration.between(this.horaInicio,this.horaFin).toMinutes();
     }
 
     /**
@@ -132,13 +129,7 @@ public class Evento {
      * Pista! usa un objeto LocalDateTime
      */
     public boolean antesDe(Evento otro) {
-        if(fecha.isBefore(otro.fecha)) return true;
-        else if(fecha.equals(otro.fecha)){
-            if(horaInicio.isBefore(otro.horaInicio)) return true;
-            else return false;
-        }
-        else return false;
-        //TODO: Debug
+        return fecha.isBefore(otro.fecha);
     }
 
   
