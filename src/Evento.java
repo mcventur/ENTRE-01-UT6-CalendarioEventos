@@ -115,21 +115,10 @@ public class Evento {
      */
     public Mes getMes() {
 
-        switch (getFecha().getMonthValue()){
-            case 1: return Mes.ENERO;
-            case 2: return Mes.FEBRERO;
-            case 3: return Mes.MARZO;
-            case 4: return Mes.ABRIL;
-            case 5: return Mes.MAYO;
-            case 6: return Mes.JUNIO;
-            case 7: return Mes.JULIO;
-            case 8: return Mes.AGOSTO;
-            case 9: return Mes.SEPTIEMBRE;
-            case 10: return Mes.OCTUBRE;
-            case 11: return Mes.NOVIEMBRE;
-            case 12: return Mes.DICIEMBRE;
-        }
-        return null;
+        //Pasamos todos los valores del enum a un array con la función values()
+        Mes[] valores = Mes.values();
+        //getMonthValue nos da un valor entre 0 y 12 para el mes de la fecha correspondiente
+        return valores[fecha.getMonthValue()-1];
     }
 
     /**
@@ -149,7 +138,7 @@ public class Evento {
      */
     public boolean antesDe(Evento otro) {
 
-        return getFecha().isBefore(otro.getFecha()) || getHoraInicio().isBefore(otro.getHoraInicio());
+        return getFecha().isBefore(otro.getFecha());
     }
 
   
