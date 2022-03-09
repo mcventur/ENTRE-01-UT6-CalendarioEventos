@@ -1,5 +1,6 @@
 import jdk.jfr.Event;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -23,7 +24,7 @@ public class CalendarioEventos {
 	private TreeMap<Mes, ArrayList<Evento>> calendario;
 
 	/**
-	 * el constructor
+	 * El constructor
 	 */
 	public CalendarioEventos() {
 		this.calendario = new TreeMap<>();
@@ -42,9 +43,13 @@ public class CalendarioEventos {
 	 */
 	public void addEvento(Evento nuevo) {
 
+		ArrayList<Evento> ev;
 
-
-
+		if (!calendario.containsKey(nuevo.getMes())) {
+			ev = new ArrayList<>();
+			ev.add(nuevo);
+			calendario.put(nuevo.getMes(), ev);
+		}
 	}
 
 	 
@@ -58,7 +63,9 @@ public class CalendarioEventos {
 
 		StringBuilder sb = new StringBuilder();
 
-		return null;
+
+
+		return sb.toString();
 	}
 
 	/**
@@ -66,7 +73,13 @@ public class CalendarioEventos {
 	 * Si el mes no existe se devuelve 0
 	 */
 	public int totalEventosEnMes(Mes mes) {
-		 
+
+		if(calendario.containsKey(mes)){
+			for (Mes eleme : calendario.keySet()) {
+				eleme.
+			}
+		}
+
 		return 0;
 	}
 
@@ -88,7 +101,8 @@ public class CalendarioEventos {
 	 * Se devuelve uno solo (el primero encontrado) aunque haya varios
 	 */
 	public String eventoMasLargo() {
-	    
+
+
 		return null;
 	}
 
