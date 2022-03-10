@@ -1,3 +1,6 @@
+package programacion.entregaut6.modelo;
+
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,22 +15,37 @@ public class Evento {
     private LocalDate fecha;
     private LocalTime horaInicio;
     private LocalTime horaFin;
-    private static DateTimeFormatter formateadorFecha = DateTimeFormatter
-        .ofPattern("dd/MM/yyyy");
-    private static DateTimeFormatter formateadorHora = DateTimeFormatter
-        .ofPattern("HH:mm");
+    private static DateTimeFormatter formateadorFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static DateTimeFormatter formateadorHora = DateTimeFormatter.ofPattern("HH:mm");
 
     /**
      * A partir de los argumentos recibidos
      * inicializa los atributos de forma adecuada
      * Todos los argumento recibidos son correctos (no hay incoherencias)
      */                 
-    public Evento(String nombre, String fecha, String horaInicio,
-    String horaFin) {
-         
+    public Evento(String nombre, String fecha, String horaInicio, String horaFin) {
+
+         this.nombre = capital(nombre.trim());
+         this.fecha = LocalDate.parse(fecha.trim(), formateadorFecha);
+         this.horaInicio = LocalTime.parse(horaInicio.trim(), formateadorHora);
+         this.horaFin = LocalTime.parse(horaFin.trim(), formateadorHora);
     }
 
-   
+    private String capital(String name) {
+
+        var splitFrase = name.split(" "); //Separo por palabras la frase en un Array
+        var str = "";
+        var resultado = "";
+
+        // A cada palabra cojo la primera letra, la capitalizo y la concateno con el resto de su palabra
+        for (int i = 0; i < splitFrase.length; i++) {
+            str = splitFrase[i].substring(0,1).toUpperCase() + splitFrase[i].substring(1);
+            // Uno las palabras con espacios para formar la frase
+            resultado += str + " ";
+        }
+
+        return resultado.trim(); //Vuelvo a limpiar la frase por el espacio anterior para eliminar el último espacio
+    }
 
     /**
      * accesor para el nombre del evento
@@ -90,7 +108,8 @@ public class Evento {
      * que se obtendrá a partir de la fecha del evento
      */
     public int getDia() {
-        return 0;
+
+        return getFecha().getDayOfWeek().getValue();
     }
 
     /**
@@ -98,15 +117,19 @@ public class Evento {
      * que se obtendrá a partir de la fecha del evento
      */
     public Mes getMes() {
-        return null;
+
+        //Pasamos todos los valores del enum a un array con la función values()
+        Mes[] valores = Mes.values();
+        //getMonthValue nos da un valor entre 0 y 12 para el mes de la fecha correspondiente
+        return valores[fecha.getMonthValue()-1];
     }
 
     /**
      * calcula y devuelve la duración del evento en minutos
      */
     public int getDuracion() {
-        return 0;
 
+        return (int) Duration.between(getHoraInicio(), getHoraFin()).toMinutes();
     }
 
     /**
@@ -117,8 +140,10 @@ public class Evento {
      * Pista! usa un objeto LocalDateTime
      */
     public boolean antesDe(Evento otro) {
-        return true;
 
+        LocalDateTime miFecha=LocalDateTime.of(this.fecha,this.horaInicio);
+        LocalDateTime otraFecha= LocalDateTime.of(otro.getFecha(),otro.getHoraInicio());
+        return (miFecha.compareTo(otraFecha)<0);
     }
 
   
@@ -139,7 +164,7 @@ public class Evento {
     }
 
     /**
-     * Código para testea la clase Evento
+     * Código para testea la clase programacion.entregaut6.modelo.Evento
      */
     public static void main(String[] args) {
         Evento ev1 = new Evento("Examen de programación", "03/02/2021",
@@ -154,7 +179,7 @@ public class Evento {
         System.out.println(ev2.toString());     
 
         System.out.println();
-        Evento ev3 = new Evento("   baluarte Pamplona    negra   ", "29/05/2021",
+        Evento ev3 = new Evento("   baluarte Pamplona negra   ", "29/05/2021",
                 "17:00",
                 "21:00");
         System.out.println(ev3.toString());
