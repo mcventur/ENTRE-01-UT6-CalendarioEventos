@@ -1,6 +1,5 @@
 import jdk.jfr.Event;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -24,7 +23,7 @@ public class CalendarioEventos {
 	private TreeMap<Mes, ArrayList<Evento>> calendario;
 
 	/**
-	 * El constructor
+	 * el constructor
 	 */
 	public CalendarioEventos() {
 		this.calendario = new TreeMap<>();
@@ -43,13 +42,9 @@ public class CalendarioEventos {
 	 */
 	public void addEvento(Evento nuevo) {
 
-		ArrayList<Evento> ev;
 
-		if (!calendario.containsKey(nuevo.getMes())) {
-			ev = new ArrayList<>();
-			ev.add(nuevo);
-			calendario.put(nuevo.getMes(), ev);
-		}
+
+
 	}
 
 	 
@@ -63,8 +58,6 @@ public class CalendarioEventos {
 
 		StringBuilder sb = new StringBuilder();
 
-
-
 		return sb.toString();
 	}
 
@@ -75,9 +68,9 @@ public class CalendarioEventos {
 	public int totalEventosEnMes(Mes mes) {
 
 		if(calendario.containsKey(mes)){
-			for (Mes eleme : calendario.keySet()) {
-				eleme.
-			}
+
+			ArrayList<Evento> eventos = calendario.get(mes);
+			return eventos.size();
 		}
 
 		return 0;
@@ -90,9 +83,19 @@ public class CalendarioEventos {
 	 *  
 	 */
 	public TreeSet<Mes> mesesConMasEventos() {
-	    
-	    
-		return null;
+
+		TreeSet<Mes> retorno = new TreeSet<>();
+
+		for (Mes element : calendario.keySet()) {
+
+			int mayor = totalEventosEnMes(element);
+			if (totalEventosEnMes(element) > mayor) {
+				mayor = totalEventosEnMes(element);
+				retorno.add(element);
+			}
+		}
+
+		return retorno;
 	}
 
 	
@@ -101,6 +104,7 @@ public class CalendarioEventos {
 	 * Se devuelve uno solo (el primero encontrado) aunque haya varios
 	 */
 	public String eventoMasLargo() {
+
 
 
 		return null;
