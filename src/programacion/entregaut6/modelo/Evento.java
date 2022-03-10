@@ -1,11 +1,13 @@
+package programacion.entregaut6.modelo;
+
+import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Representa a un evento del calendario
- * 
+ *  Representa a un evento del calendario
+ *  @author Adrián Las
  */
 public class Evento {
     private String nombre;
@@ -22,12 +24,23 @@ public class Evento {
      * inicializa los atributos de forma adecuada
      * Todos los argumento recibidos son correctos (no hay incoherencias)
      */                 
-    public Evento(String nombre, String fecha, String horaInicio,
-    String horaFin) {
-         
+    public Evento(String nombre, String fecha, String horaInicio, String horaFin) {
+        this.nombre = fnombre(nombre);
+        this.fecha = LocalDate.parse(fecha.trim(),formateadorFecha);
+        this.horaInicio = LocalTime.parse(horaInicio.trim(),formateadorHora);
+        this.horaFin = LocalTime.parse(horaFin.trim(),formateadorHora);
     }
 
-   
+    private String fnombre(String nombre) {
+        StringBuilder ret = new StringBuilder();
+
+        for(String parte:nombre.split(" ")){
+            if(!parte.isBlank()){
+                ret.append(parte.toUpperCase().charAt(0)).append(parte.toLowerCase().substring(1)).append(" ");
+            }
+        }
+        return ret.toString().trim();
+    }
 
     /**
      * accesor para el nombre del evento
@@ -90,7 +103,7 @@ public class Evento {
      * que se obtendrá a partir de la fecha del evento
      */
     public int getDia() {
-        return 0;
+        return fecha.getDayOfWeek().getValue();
     }
 
     /**
@@ -98,15 +111,14 @@ public class Evento {
      * que se obtendrá a partir de la fecha del evento
      */
     public Mes getMes() {
-        return null;
+        return Mes.values()[fecha.getMonthValue()-1];
     }
 
     /**
      * calcula y devuelve la duración del evento en minutos
      */
     public int getDuracion() {
-        return 0;
-
+        return (int)Duration.between(this.horaInicio,this.horaFin).toMinutes();
     }
 
     /**
@@ -117,8 +129,7 @@ public class Evento {
      * Pista! usa un objeto LocalDateTime
      */
     public boolean antesDe(Evento otro) {
-        return true;
-
+        return fecha.isBefore(otro.fecha);
     }
 
   
@@ -135,11 +146,11 @@ public class Evento {
         String.format("%12s: %s (%d')", "Hora fin",
             this.horaFin.format(formateadorHora),
             this.getDuracion())
-        +  "\n------------------------------------------------------";
+        +  "\n------------------------------------------------------\n";
     }
 
     /**
-     * Código para testea la clase Evento
+     * Código para testea la clase programacion.entregaut6.modelo.Evento
      */
     public static void main(String[] args) {
         Evento ev1 = new Evento("Examen de programación", "03/02/2021",
