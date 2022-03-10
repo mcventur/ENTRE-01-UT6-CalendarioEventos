@@ -3,10 +3,17 @@
   <component name="Encoding">
     <file url="file://$USER_HOME$/Desktop/AD 6.8 Tesauro AL/src/Tesauro.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/eventos.csv" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/AppCalendarioEventos.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/CalendarioEventos.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/CalendarioIO.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/Evento.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/IUConsola.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programacion/entregaut6/demo/AppCalendarioEventos.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programacion/entregaut6/demo/AppCalendarioEventos.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programacion/entregaut6/interfaz/IUConsola.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programacion/entregaut6/interfaz/IUConsola.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programacion/entregaut6/io/CalendarioEventos.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programacion/entregaut6/io/CalendarioEventos.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programacion/entregaut6/io/CalendarioEventos.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programacion/entregaut6/io/CalendarioIO.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programacion/entregaut6/io/CalendarioIO.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programacion/entregaut6/modelo/Evento.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programacion/entregaut6/modelo/Evento.java" charset="windows-1252" />
+    <file url="file://$USER_HOME$/OneDrive/Escritorio/Tesauro.java" charset="windows-1252" />
   </component>
 </project>

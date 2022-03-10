@@ -1,4 +1,6 @@
-import jdk.jfr.Event;
+package programacion.entregaut6.modelo;
+
+import programacion.entregaut6.io.CalendarioIO;
 
 import java.util.*;
 
@@ -9,7 +11,7 @@ import java.util.*;
  * y no se repiten
  * 
  * El calendario guarda en un map los eventos de una serie de meses
- * Cada mes (la clave en el map, un enumerado Mes) tiene asociados 
+ * Cada mes (la clave en el map, un enumerado programacion.entregaut6.modelo.Mes) tiene asociados
  * en una colección ArrayList los eventos de ese mes
  * 
  * Solo aparecen los meses que incluyen algún evento
@@ -36,23 +38,36 @@ public class CalendarioEventos {
 	 * por ese único evento
 	 * Si la clave (el mes) ya existe se añade el nuevo evento insertándolo de forma
 	 * que quede ordenado por fecha y hora de inicio
-	 * 
-	 * Pista! Observa que en la clase Evento hay un método antesDe() que vendrá
+	 * <p>
+	 * Pista! Observa que en la clase programacion.entregaut6.modelo.Evento hay un método antesDe() que vendrá
 	 * muy bien usar aquí
 	 */
 	public void addEvento(Evento nuevo) {
 
+		ArrayList<Evento> setEventos;
 
+		if (!calendario.containsKey(nuevo.getMes())) {
 
+			setEventos = new ArrayList<>();
+			setEventos.add(nuevo);
+			calendario.put(nuevo.getMes(), setEventos);
 
+		} else {
+
+			setEventos = new ArrayList<>();
+			for (Evento i : calendario.get(nuevo.getMes())) {
+				if (i.antesDe(nuevo)) {
+					setEventos.add(nuevo);
+				}
+			}
+			calendario.put((nuevo.getMes()), setEventos);
+		}
 	}
-
-	 
 
 	/**
 	 * Representación textual del calendario
-	 * Hacer de forma eficiente 
-	 * Usar el conjunto de entradas  
+	 * Hacer de forma eficiente
+	 * Usar el conjunto de entradas
 	 */
 	public String toString() {
 
@@ -67,20 +82,20 @@ public class CalendarioEventos {
 	 */
 	public int totalEventosEnMes(Mes mes) {
 
-		if(calendario.containsKey(mes)){
+		if (calendario.containsKey(mes)) {
 
 			ArrayList<Evento> eventos = calendario.get(mes);
 			return eventos.size();
+
 		}
 
 		return 0;
 	}
 
 	/**
-	 * Devuelve un conjunto (importa el orden) 
+	 * Devuelve un conjunto (importa el orden)
 	 * con los meses que tienen mayor nº de eventos
 	 * Hacer un solo recorrido del map con el conjunto de claves
-	 *  
 	 */
 	public TreeSet<Mes> mesesConMasEventos() {
 
@@ -89,6 +104,7 @@ public class CalendarioEventos {
 		for (Mes element : calendario.keySet()) {
 
 			int mayor = totalEventosEnMes(element);
+
 			if (totalEventosEnMes(element) > mayor) {
 				mayor = totalEventosEnMes(element);
 				retorno.add(element);
@@ -98,35 +114,53 @@ public class CalendarioEventos {
 		return retorno;
 	}
 
-	
+
 	/**
 	 * Devuelve el nombre del evento de mayor duración en todo el calendario
 	 * Se devuelve uno solo (el primero encontrado) aunque haya varios
 	 */
 	public String eventoMasLargo() {
 
+		String retorno = null;
 
+		for (Mes mes : calendario.keySet()) {
 
-		return null;
+			ArrayList<Evento> recorrido = calendario.get(mes);
+
+			for (Evento evento : recorrido) {
+				int mayor = evento.getDuracion();
+				if (evento.getDuracion() > mayor) {
+					retorno = evento.getNombre();
+				}
+			}
+		}
+
+		return retorno;
 	}
 
 	/**
 	 * Borrar del calendario todos los eventos de los meses indicados en el array
 	 * y que tengan lugar el día de la semana proporcionado (se entiende día de la
 	 * semana como 1 - Lunes, 2 - Martes ..  6 - Sábado, 7 - Domingo)
-	 * 
+	 * <p>
 	 * Si alguno de los meses del array no existe el el calendario no se hace nada
 	 * Si al borrar de un mes los eventos el mes queda con 0 eventos se borra la entrada
 	 * completa del map
 	 */
 	public int cancelarEventos(Mes[] meses, int dia) {
-		 
 
-		return 0;
+		int retorno = 0;
+
+		for (Map.Entry<Mes, ArrayList<Evento>> item : calendario.entrySet()) {
+
+		}
+
+		return retorno;
 	}
 
+
 	/**
-	 * Código para testear la clase CalendarioEventos
+	 * Código para testear la clase programacion.entregaut6.modelo.CalendarioEventos
 	 */
 	public static void main(String[] args) {
 		CalendarioEventos calendario = new CalendarioEventos();
@@ -141,11 +175,11 @@ public class CalendarioEventos {
 		mes = Mes.MARZO;
 		System.out.println("Eventos en " + mes + " = "
 		                    + calendario.totalEventosEnMes(mes));
-		System.out.println("Mes/es con más eventos "
+		System.out.println("programacion.entregaut6.modelo.Mes/es con más eventos "
 		                    + calendario.mesesConMasEventos());
 
 		System.out.println();
-		System.out.println("Evento de mayor duración: "
+		System.out.println("programacion.entregaut6.modelo.Evento de mayor duración: "
 		                    + calendario.eventoMasLargo());
 
 		System.out.println();
