@@ -146,7 +146,7 @@ public class Evento {
         String.format("%12s: %s (%d')", "Hora fin",
             this.horaFin.format(formateadorHora),
             this.getDuracion())
-        +  "\n------------------------------------------------------";
+        +  "\n------------------------------------------------------\n";
     }
 
     /**
