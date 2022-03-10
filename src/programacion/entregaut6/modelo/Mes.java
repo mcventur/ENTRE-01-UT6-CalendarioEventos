@@ -1,3 +1,5 @@
+package programacion.entregaut6.modelo;
+
 /**
  *  @author Adrián Las
 */

@@ -1,9 +1,9 @@
+package programacion.entregaut6.modelo;
+
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 /**
  *  Representa a un evento del calendario
@@ -150,7 +150,7 @@ public class Evento {
     }
 
     /**
-     * Código para testea la clase Evento
+     * Código para testea la clase programacion.entregaut6.modelo.Evento
      */
     public static void main(String[] args) {
         Evento ev1 = new Evento("Examen de programación", "03/02/2021",

@@ -1,3 +1,9 @@
+package programacion.entregaut6.interfaz;
+
+import programacion.entregaut6.io.CalendarioIO;
+import programacion.entregaut6.modelo.CalendarioEventos;
+import programacion.entregaut6.modelo.Mes;
+
 import java.util.Scanner;
 
 public class IUConsola {
@@ -12,7 +18,7 @@ public class IUConsola {
     private CalendarioEventos calendario;
 
     /**
-     * Constructor de la clase IUConsola
+     * Constructor de la clase programacion.entregaut6.interfaz.IUConsola
      */
     public IUConsola(CalendarioEventos calendario) {
         teclado = new Scanner(System.in);
@@ -65,7 +71,7 @@ public class IUConsola {
         System.out.println("1. Mostrar calendario");
         System.out.println("2. Total eventos de mes");
         System.out.println("3. Meses con más eventos");
-        System.out.println("4. Evento más largo");
+        System.out.println("4. programacion.entregaut6.modelo.Evento más largo");
         System.out.println("5. Cancelar eventos");
         System.out.println("6. Salir");
         System.out.print("Teclee opción: ");
@@ -125,7 +131,7 @@ public class IUConsola {
      *  Muestra los meses con mayor nº de eventos
      */
     private void mesesConMasEventos() {
-        System.out.println("Mes/es con más eventos: "
+        System.out.println("programacion.entregaut6.modelo.Mes/es con más eventos: "
             + calendario.mesesConMasEventos());
     }
 
@@ -165,7 +171,7 @@ public class IUConsola {
             teclado.nextLine();
         }
         catch (IllegalArgumentException e) {
-            System.out.println("Mes incorrecto o no existe en el calendario");
+            System.out.println("programacion.entregaut6.modelo.Mes incorrecto o no existe en el calendario");
         }
 
         

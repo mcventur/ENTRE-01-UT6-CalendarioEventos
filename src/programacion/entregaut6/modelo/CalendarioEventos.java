@@ -1,3 +1,7 @@
+package programacion.entregaut6.modelo;
+
+import programacion.entregaut6.io.CalendarioIO;
+
 import java.util.*;
 
 /**
@@ -7,7 +11,7 @@ import java.util.*;
  * y no se repiten
  *
  * El calendario guarda en un map los eventos de una serie de meses
- * Cada mes (la clave en el map, un enumerado Mes) tiene asociados 
+ * Cada mes (la clave en el map, un enumerado programacion.entregaut6.modelo.Mes) tiene asociados
  * en una colección ArrayList los eventos de ese mes
  *
  * Solo aparecen los meses que incluyen algún evento
@@ -32,7 +36,7 @@ public class CalendarioEventos {
      * Si la clave (el mes) ya existe se añade el nuevo evento insertándolo de forma
      * que quede ordenado por fecha y hora de inicio
      *
-     * Pista! Observa que en la clase Evento hay un método antesDe() que vendrá
+     * Pista! Observa que en la clase programacion.entregaut6.modelo.Evento hay un método antesDe() que vendrá
      * muy bien usar aquí
      */
     public void addEvento(Evento nuevo) {
@@ -159,7 +163,7 @@ public class CalendarioEventos {
     }
 
     /**
-     * Código para testear la clase CalendarioEventos
+     * Código para testear la clase programacion.entregaut6.modelo.CalendarioEventos
      */
     public static void main(String[] args) {
         CalendarioEventos calendario = new CalendarioEventos();
@@ -174,11 +178,11 @@ public class CalendarioEventos {
         mes = Mes.MARZO;
         System.out.println("Eventos en " + mes + " = "
                 + calendario.totalEventosEnMes(mes));
-        System.out.println("Mes/es con más eventos "
+        System.out.println("programacion.entregaut6.modelo.Mes/es con más eventos "
                 + calendario.mesesConMasEventos());
 
         System.out.println();
-        System.out.println("Evento de mayor duración: "
+        System.out.println("programacion.entregaut6.modelo.Evento de mayor duración: "
                 + calendario.eventoMasLargo());
 
         System.out.println();
